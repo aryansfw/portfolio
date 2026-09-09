@@ -7,3 +7,4 @@ Approved finding: 1.
 3. **PASS, approved layout change**: The shared container now uses automatic margins at every breakpoint while preserving 24px mobile padding and the existing 576px maximum reading width.
 4. **PASS, R-37**: Added `DESIGN.md` with the owner's selected bold, studio-like direction and explicit ENERGY 3 / RHYTHM 3 / MOTION 1 dials.
 5. **PASS, R-20**: Added a cobalt project-index motif, a stronger homepage focal point, and documented the palette and typography rationale in `DESIGN.md`.
+6. **PASS, R-31**: Documented the rationale for palette, typography, project cards, layout, spacing, theme behavior, and the decision not to use illustrations in `DESIGN.md`.
