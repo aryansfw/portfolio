@@ -12,7 +12,7 @@ Palette: neutral canvas with a restrained cobalt accent.
 
 Typography: a large, tight homepage introduction creates the page focal point while preserving a readable system font.
 
-Project cards: sequential indices make the project list read as an authored body of work, and the cobalt accent guides scanning without adding decoration.
+Project cards: the homepage gives the strongest evidence the most room, while the projects page alternates image and text rows so recruiters can scan outcomes without a repeated card grid. Sequential indices make the project list read as an authored body of work, and the cobalt accent guides scanning without adding decoration.
 
 Layout: a wide centered portfolio canvas gives project evidence room to lead, while articles keep a narrower reading measure.
 

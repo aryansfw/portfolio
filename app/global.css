@@ -29,10 +29,6 @@
   }
 }
 
-html {
-  min-width: 320px;
-}
-
 .prose .anchor {
   @apply absolute invisible no-underline;
 

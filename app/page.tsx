@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { BlogPosts } from 'app/components/posts'
 import { ProjectCards } from 'app/components/projects'
+import { GitHubIcon, LinkedInIcon, MailIcon } from 'app/components/icons'
 
 export default function Page() {
   return (
@@ -13,16 +14,19 @@ export default function Page() {
       </h1>
       <p className="max-w-2xl text-lg text-neutral-700 dark:text-neutral-300">
         Frontend developer building production SaaS, health-tech, and
-        AI-powered web applications. Based in Surabaya, Indonesia.
+        interview practice web applications. Based in Surabaya, Indonesia.
       </p>
       <nav className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm" aria-label="Contact links">
-        <a className="underline underline-offset-4" href="mailto:aryan.s.wardana@gmail.com">
+        <a className="inline-flex min-h-11 items-center gap-2 underline underline-offset-4" href="mailto:aryan.s.wardana@gmail.com">
+          <MailIcon className="size-4" />
           Email
         </a>
-        <a className="underline underline-offset-4" href="https://github.com/aryansfw" target="_blank" rel="noopener noreferrer">
+        <a className="inline-flex min-h-11 items-center gap-2 underline underline-offset-4" href="https://github.com/aryansfw" target="_blank" rel="noopener noreferrer">
+          <GitHubIcon className="size-4" />
           GitHub
         </a>
-        <a className="underline underline-offset-4" href="https://www.linkedin.com/in/aryanshafawardana" target="_blank" rel="noopener noreferrer">
+        <a className="inline-flex min-h-11 items-center gap-2 underline underline-offset-4" href="https://www.linkedin.com/in/aryanshafawardana" target="_blank" rel="noopener noreferrer">
+          <LinkedInIcon className="size-4" />
           LinkedIn
         </a>
       </nav>

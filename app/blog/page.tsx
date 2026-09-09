@@ -7,8 +7,11 @@ export const metadata = {
 
 export default function Page() {
   return (
-      <section className="min-w-0">
-      <h1 className="font-semibold text-2xl mb-8 tracking-tighter">Project notes</h1>
+    <section className="min-w-0">
+      <h1 className="text-4xl font-semibold tracking-[-0.04em] sm:text-5xl">Project notes</h1>
+      <p className="mb-12 mt-4 max-w-2xl text-lg text-neutral-700 dark:text-neutral-300">
+        Build notes from shipped frontend work, including the decisions behind each project.
+      </p>
       <BlogPosts />
     </section>
   )
