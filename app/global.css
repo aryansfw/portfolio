@@ -83,6 +83,14 @@
   margin: 2rem 0;
 }
 
+@media (min-width: 768px) {
+  .prose figure:not(.mobile-screenshot) {
+    width: min(70vw, 860px);
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
 .prose figure img {
   display: block;
   width: 100%;
