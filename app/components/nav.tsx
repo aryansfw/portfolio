@@ -25,8 +25,8 @@ export function Navbar() {
           className="flex flex-wrap items-center gap-x-5 gap-y-2 border-b border-neutral-200 pb-4 dark:border-neutral-800"
           id="nav"
         >
-          <Link className="mr-3 inline-flex min-h-11 items-center text-sm font-semibold tracking-[0.12em] text-sky-600 dark:text-sky-400" href="/" aria-label="Aryan Shafa Wardana home">
-            ASW
+          <Link className="mr-3 inline-flex min-h-11 items-center text-sm font-semibold text-sky-600 dark:text-sky-400" href="/" aria-label="Aryan Shafa Wardana home">
+            Aryan
           </Link>
           {Object.entries(navItems).map(([path, { name }]) => {
             let active = path === '/' ? pathname === '/' : pathname.startsWith(path)
