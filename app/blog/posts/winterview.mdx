@@ -1,0 +1,37 @@
+---
+title: 'Building Winterview: A Focused Interview-Practice App'
+publishedAt: '2026-09-09'
+summary: 'How I built a solo interview-practice product around AI-generated questions, timed responses, and recorded-answer review.'
+---
+
+Winterview is an interview-practice app I built to make solo rehearsal more useful. Instead of only reading a list of common questions, a user can generate tailored prompts, answer them in a timed session, record their response, and review the result afterward.
+
+I designed the product myself in Figma before implementing it.
+
+The product is intentionally focused on the practice loop: prepare, answer, review, and return for another session.
+
+## A complete practice flow
+
+The core experience starts with question generation. Users provide the context for the kind of interview they want to practise, then receive a set of questions to work through.
+
+From there, each session needs to feel like practice rather than a static form. The app guides users through timed answers and saves recordings so they can review delivery as well as content. Completed interviews remain available for later review instead of disappearing at the end of a session.
+
+## Building the product end to end
+
+I built Winterview as a solo project with a React and TypeScript frontend, an Express backend, Supabase for authentication and persistence, and Groq for question generation. The browser MediaRecorder API handles video capture, while shared validation keeps the frontend and backend aligned around the same input rules.
+
+That stack let me focus on the product behavior without separating the work into artificial demos: authentication, question generation, timed sessions, recording, review, and saved interviews all belong to one workflow.
+
+## What I wanted to learn
+
+Winterview was an opportunity to connect AI output with a feature that has a clear user purpose. The generated questions are only the beginning; the value comes from turning them into a structured practice session and giving users a way to look back at their answers.
+
+It also reinforced the importance of browser-native capabilities. Recording video in the browser introduces practical concerns around permissions, media state, and session recovery. Keeping the flow small made those concerns easier to reason about and test.
+
+## Result
+
+Winterview delivers an end-to-end interview-practice experience: authenticated users can generate questions, complete timed recorded responses, review their answers, and return to saved interviews.
+
+## Deployment
+
+Winterview is live at [winterview.my.id](https://winterview.my.id), with the web app deployed on Vercel, the API on Render, and Supabase handling authentication, persistence, and recording storage. The source code is available on [GitHub](https://github.com/aryansfw/winterview).
