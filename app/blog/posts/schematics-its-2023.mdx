@@ -4,9 +4,7 @@ publishedAt: '2026-09-09'
 summary: 'My frontend contributions to an event platform serving 3,000+ participants, from public information to registration and review workflows.'
 ---
 
-Schematics ITS 2023 needed to serve two very different audiences: people discovering the event and participants moving through registration and verification. My work focused on making those paths clear, responsive, and connected to the event platform's backend APIs.
-
-The result was an event website that served more than 3,000 participants.
+Schematics ITS 2023 served two audiences: people discovering the event and participants moving through registration and verification. I worked on responsive pages and API-connected workflows for both groups. The event website served more than 3,000 participants.
 
 <figure>
   <a href="/projects/schematics.png" target="_blank" rel="noopener noreferrer" aria-label="Open Schematics landing page screenshot at full size">
@@ -17,20 +15,48 @@ The result was an event website that served more than 3,000 participants.
 
 ## From event information to action
 
-Event sites often begin as landing pages, but the useful work starts when visitors need to take action. I contributed responsive public pages alongside bootcamp and seminar registration flows, payment-proof uploads, and participant-facing status updates.
+The public landing pages led into bootcamp and seminar registration flows. I connected those pages to payment-proof uploads and participant-facing status updates so visitors could continue from information to registration.
 
-The goal was to keep the path from learning about an event to completing registration understandable on both desktop and mobile screens.
+I kept that path understandable on desktop and mobile screens.
+
+## Keeping registration steps valid
+
+The registration flow validates each step before moving forward. That prevents incomplete personal data or payment details from being hidden by a later screen.
+
+This simplified example shows the guard between steps:
+
+```ts
+function handleNext() {
+  trigger(fieldsForStep[currentStep], { shouldFocus: true }).then((valid) => {
+    if (valid) setCurrentStep((step) => step + 1)
+  })
+}
+```
+
+The form keeps its state across steps, then submits as `FormData` on the final screen.
 
 ## Supporting the operations team
 
-The platform also needed administration workflows for reviewing participant information and registration status. I built interface work for those review screens so staff could move from participant data to the next required action without relying on disconnected tools.
+The platform also needed administration workflows for reviewing participant information and registration status. I built the participant detail and review screens so staff could update a submission from the same workflow.
 
-I also reviewed frontend work from three staff members, helping maintain consistency in implementation and interface quality as the event platform grew.
+I also reviewed frontend work from three staff members, which helped keep implementation and interface quality consistent as the platform grew.
 
-## What the project reinforced
+The admin flow exposed explicit payment states, so each reviewer action mapped to one backend status.
 
-Schematics reinforced the need to connect public pages, registration, document submission, and review work into one participant journey. Responsive behavior matters especially because participants may start and finish the process on different devices.
+This simplified example shows that mapping:
+
+```ts
+const paymentActions = {
+  verified: () => updatePaymentStatus("verified"),
+  need_revision: () => updatePaymentStatus("need_revision"),
+  rejected: () => updatePaymentStatus("rejected"),
+}
+```
+
+## What I took from it
+
+The project showed me that public pages, registration, document submission, and review screens need to share one flow. Participants may start and finish on different devices, so responsive behavior belongs in the workflow from the beginning.
 
 ## Result
 
-I contributed frontend features and API-integrated workflows for an event platform serving 3,000+ participants. The public site remains available at [schematics-23.vercel.app](https://schematics-23.vercel.app/).
+I contributed frontend features and API-integrated workflows across the event platform. The public site remains available at [schematics-23.vercel.app](https://schematics-23.vercel.app/).

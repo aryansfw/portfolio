@@ -4,11 +4,9 @@ publishedAt: '2026-09-09'
 summary: 'How I built a solo interview-practice product around AI-generated questions, timed responses, and recorded-answer review.'
 ---
 
-Winterview is an interview-practice app I built to make solo rehearsal more useful. Instead of only reading a list of common questions, a user can generate tailored prompts, answer them in a timed session, record their response, and review the result afterward.
+Winterview is an interview-practice app I built for solo rehearsal. A user generates tailored prompts, answers them in a timed session, records each response, and reviews the result afterward.
 
-I designed the product myself in Figma before implementing it.
-
-The product is intentionally focused on the practice loop: prepare, answer, review, and return for another session.
+I designed the product in Figma before implementing it. That design centered the product on one repeatable loop: prepare, answer, review, and return for another session.
 
 ## A complete practice flow
 
@@ -21,7 +19,22 @@ The core experience starts with question generation. Users provide the context f
   <figcaption>Choose an interview topic and the number of questions.</figcaption>
 </figure>
 
-From there, each session needs to feel like practice rather than a static form. The app guides users through timed answers and saves recordings so they can review delivery as well as content. Completed interviews remain available for later review instead of disappearing at the end of a session.
+The session needed to feel like practice rather than a static form. Winterview guides users through timed answers, saves recordings for delivery review, and keeps completed interviews available afterward.
+
+The interview screen treats preparation and answering as separate phases. When one timer ends, the session moves to the next valid phase.
+
+This simplified example shows the transition logic:
+
+```ts
+type Phase = "think" | "answer"
+
+function nextPhase(phase: Phase, questionIndex: number, questionCount: number) {
+  if (phase === "think") return "answer"
+  return questionIndex + 1 < questionCount ? "think" : "complete"
+}
+```
+
+The implementation starts and stops recording around the answer phase. Keeping those boundaries explicit made timeout and cleanup behavior easier to test.
 
 <figure>
   <a href="/projects/winterview/interview.png" target="_blank" rel="noopener noreferrer" aria-label="Open active interview screenshot at full size">
@@ -44,21 +57,32 @@ From there, each session needs to feel like practice rather than a static form. 
   <figcaption>The active interview layout on a mobile screen.</figcaption>
 </figure>
 
-## Building the product end to end
+## Connecting the browser pieces
 
-I built Winterview as a solo project with a React and TypeScript frontend, an Express backend, Supabase for authentication and persistence, and Groq for question generation. The browser MediaRecorder API handles video capture, while shared validation keeps the frontend and backend aligned around the same input rules.
+I built Winterview as a solo project with a React and TypeScript frontend, an Express backend, Supabase for authentication and persistence, and Groq for question generation. Shared validation keeps the frontend and backend aligned, while the browser `MediaRecorder` API handles video capture.
 
-The work connected authentication, question generation, timed sessions, recording, review, and saved interviews in one product.
+This simplified excerpt shows the recording boundary:
+
+```ts
+const recorder = new MediaRecorder(stream, { mimeType: "video/webm" })
+const chunks: Blob[] = []
+
+recorder.ondataavailable = (event) => chunks.push(event.data)
+recorder.onstop = () => saveClip(new Blob(chunks, { type: "video/webm" }))
+recorder.start()
+```
+
+The browser provides the media stream. Winterview coordinates permissions, recording state, and saving the finished clip against its question.
 
 ## What I wanted to learn
 
-Winterview was an opportunity to connect AI output with a feature that has a clear user purpose. The generated questions are only the beginning; the value comes from turning them into a structured practice session and giving users a way to look back at their answers.
+Winterview gave me a practical way to use generated questions: the questions start the session, but the product's value comes from the timed practice and saved review.
 
-It also reinforced the importance of browser-native capabilities. Recording video in the browser introduces practical concerns around permissions, media state, and session recovery. Keeping the flow small made those concerns easier to reason about and test.
+Recording video in the browser introduced concrete concerns around permissions, media state, and session recovery. Keeping the flow small made those concerns easier to test.
 
 ## Result
 
-Winterview delivers an end-to-end interview-practice experience: authenticated users can generate questions, complete timed recorded responses, review their answers, and return to saved interviews.
+Authenticated users can generate questions, complete timed recorded responses, review their answers, and return to saved interviews.
 
 ## Deployment
 

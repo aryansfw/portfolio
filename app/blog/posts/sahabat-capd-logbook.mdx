@@ -4,9 +4,9 @@ publishedAt: '2026-09-09'
 summary: 'How I approached a multi-step CAPD treatment logbook as a state and logic problem, then iterated it for real-world use.'
 ---
 
-Sahabat CAPD is a monitoring application for people undergoing continuous ambulatory peritoneal dialysis (CAPD) and the clinicians who review their data. One of my main areas of work was the patient logbook: the workflow for recording a treatment exchange.
+Sahabat CAPD is a monitoring application for people undergoing continuous ambulatory peritoneal dialysis (CAPD) and the clinicians who review their data. I worked mainly on the patient logbook, which records each treatment exchange.
 
-At first, it looked like a straightforward set of forms. In practice, it was a sequence of actions with timestamps, ordering, and conditions that determine what a patient can do next. Getting each revision right took much more than wiring fields to an API.
+The logbook looked like a straightforward set of forms at first. In practice, each exchange depended on timestamps, ordering, and conditions that determined what a patient could do next. The difficult part was turning those rules into a flow that stayed correct as the product changed.
 
 <figure className="mobile-screenshot">
   <a href="/projects/sahabat-capd.png" target="_blank" rel="noopener noreferrer" aria-label="Open Sahabat CAPD screenshot at full size">
@@ -17,22 +17,60 @@ At first, it looked like a straightforward set of forms. In practice, it was a s
 
 ## Start with the logic, not the UI
 
-I decided not to brute-force individual screens until they appeared to work. Instead, I treated the exchange flow as a logic problem first: identify the possible states, the valid transitions, and the data each step needed to carry forward.
+I did not start by patching individual screens until they appeared to work. I mapped the possible states, valid transitions, and data each step needed to carry forward before changing the interface.
 
-That framing made it easier to reason about issues that kept returning during iteration, including exchange ordering, entry and exit times, redirects after an action, previous-date records, and error states. The flow was revised repeatedly as the product developed, rather than being treated as a one-time form implementation.
+This made recurring problems easier to isolate: exchange ordering, entry and exit times, redirects after an action, previous-date records, and error states. Each revision changed a rule or transition instead of adding another screen-specific exception.
+
+The following is a simplified version of that state-based decision:
+
+```ts
+const record = detailForDate ?? createRecordForToday()
+
+if (!record.completed) {
+  return routeTo(`/logbook/${date}/${record.id}/ganti`)
+}
+
+return routeTo(`/logbook/${date}/${record.id}`)
+```
+
+Each transition had one clear owner. The page rendered the current state and routed to the next valid action.
 
 ## Working within a shared deployment domain
 
-The application was deployed beneath a shared ITS research domain at a project-specific path. That made navigation more complicated than a typical root-domain Next.js deployment.
+The application ran beneath a project-specific path on the shared ITS research domain. That made navigation more complicated than a typical root-domain Next.js deployment.
 
-I introduced a project-level router wrapper so application navigation could consistently account for the deployment path while keeping route calls readable in the feature code. The project later standardized the production configuration with Next.js base-path support and further routing refinements.
+I introduced a project-level router wrapper so feature code could use normal application routes while the wrapper handled the deployment path. The project later standardized production configuration with Next.js base-path support and additional routing refinements.
+
+This simplified example shows the boundary:
+
+```ts
+export const routerLink = (router: AppRouterInstance) => ({
+  push: (href: string) => router.push(`${basePath}${href}`),
+  replace: (href: string) => router.replace(`${basePath}${href}`),
+  back: () => router.back(),
+})
+```
+
+Keeping that concern in one wrapper reduced repeated path logic across the application.
 
 ## Device-aware capture was part of the workflow
 
-The logbook also included camera capture and image-detection integration. That meant working across device cameras and screen sizes, including camera-facing controls, capture guidance, previews, and follow-up fixes. It was a reminder that a browser feature can be technically available while still needing careful interface work to be dependable for real users.
+The logbook also included camera capture and image-detection integration. I had to support front and rear cameras, capture guidance, previews, and different screen sizes while keeping the same form flow.
+
+```ts
+const [facingMode, setFacingMode] = useState<"user" | "environment">("user")
+
+<Webcam
+  audio={false}
+  screenshotFormat="image/jpeg"
+  videoConstraints={{ facingMode }}
+/>
+```
+
+The capture flow then handled preview, confirmation, retry, and camera switching in one place.
 
 ## Outcome
 
-Between March 2024 and May 2025, the deployed application recorded 415 completed treatment exchanges from 43 patients across 8 participating hospitals, with activity on 265 days. I also contributed health-indicator charts, medical-record editing, notifications, and guided help alongside the logbook work.
+Between March 2024 and May 2025, the deployed application recorded 415 completed treatment exchanges from 43 patients across 8 participating hospitals, with activity on 265 days.
 
-The project changed how I approach workflows with similar dependencies: I map the states and rules before implementing the interface.
+Alongside the logbook, I contributed health-indicator charts, medical-record editing, notifications, and guided help. The project changed how I approach dependent workflows: I map the states and rules before implementing the interface.
