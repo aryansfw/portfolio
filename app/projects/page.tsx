@@ -11,7 +11,7 @@ export default function Page() {
     <section>
       <h1 className="text-2xl font-semibold tracking-tighter">Projects</h1>
       <p className="mb-8 mt-3 text-neutral-700 dark:text-neutral-300">
-        Selected work covering the problem, implementation approach, and outcome.
+        Frontend work across SaaS, health-tech, AI, and event platforms.
       </p>
       <ProjectCards detailed />
     </section>
