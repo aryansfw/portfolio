@@ -83,6 +83,35 @@ html {
   @apply m-0;
 }
 
+.prose figure {
+  margin: 2rem 0;
+}
+
+.prose figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.prose figcaption {
+  margin-top: 0.5rem;
+  color: #737373;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.prose figure.mobile-screenshot {
+  width: min(100%, 320px);
+  margin-inline: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  .prose figcaption {
+    color: #a3a3a3;
+  }
+}
+
 .prose p {
   @apply my-4 text-neutral-800 dark:text-neutral-200;
 }
