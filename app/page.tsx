@@ -5,8 +5,8 @@ import { ProjectCards } from 'app/components/projects'
 export default function Page() {
   return (
     <section>
-      <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
-        Aryan, Frontend Developer
+      <h1 className="mb-6 text-4xl font-semibold tracking-[-0.04em]">
+        Aryan, <span className="text-sky-600 dark:text-sky-400">Frontend Developer</span>
       </h1>
       <p className="text-neutral-700 dark:text-neutral-300">
         Frontend developer building production SaaS, health-tech, and

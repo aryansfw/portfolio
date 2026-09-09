@@ -3,12 +3,15 @@ import { projects } from 'app/projects'
 export function ProjectCards({ detailed = false }: { detailed?: boolean }) {
   return (
     <div className="space-y-6">
-      {projects.map((project) => (
+      {projects.map((project, index) => (
         <article
           key={project.id}
           id={detailed ? project.id : undefined}
-          className="rounded-lg border border-neutral-200 p-5 dark:border-neutral-800"
+          className="rounded-lg border border-neutral-200 p-5 transition-colors hover:border-sky-500/50 dark:border-neutral-800"
         >
+          <p className="text-sm font-semibold tabular-nums text-sky-600 dark:text-sky-400">
+            {String(index + 1).padStart(2, '0')}
+          </p>
           <h2 className="text-lg font-medium tracking-tight">{project.title}</h2>
           <p className="mt-2 text-neutral-700 dark:text-neutral-300">
             {project.summary}
