@@ -12,7 +12,7 @@ export default function Page() {
       <p className="mb-12 mt-4 max-w-2xl text-lg text-neutral-700 dark:text-neutral-300">
         Build notes from shipped frontend work, including the decisions behind each project.
       </p>
-      <BlogPosts />
+      <BlogPosts showImages />
     </section>
   )
 }
