@@ -6,7 +6,7 @@ export default function Page() {
   return (
     <section>
       <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
-        Aryan — Frontend Developer
+        Aryan, Frontend Developer
       </h1>
       <p className="text-neutral-700 dark:text-neutral-300">
         Frontend developer building production SaaS, health-tech, and

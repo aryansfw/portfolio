@@ -1,7 +1,6 @@
 import { getBlogPosts } from 'app/blog/utils'
 
-// TODO: replace with the production domain before publishing.
-export const baseUrl = 'https://TODO.example.com'
+export const baseUrl = 'https://aryanwardana.vercel.app'
 
 export default async function sitemap() {
   let blogs = getBlogPosts().map((post) => ({
