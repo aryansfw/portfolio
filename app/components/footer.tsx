@@ -18,13 +18,6 @@ function ArrowIcon() {
 export default function Footer() {
   return (
     <footer className="mb-16">
-      <a
-        className="mt-8 flex items-center text-neutral-600 transition-all hover:text-neutral-800 dark:text-neutral-300 dark:hover:text-neutral-100"
-        href="/rss"
-      >
-        <ArrowIcon />
-        <span className="ml-2">rss</span>
-      </a>
       <nav className="mt-8 flex flex-wrap gap-x-4 gap-y-2" aria-label="Contact links">
         <a className="underline underline-offset-4" href="mailto:aryan.s.wardana@gmail.com">
           Email
@@ -46,6 +39,13 @@ export default function Footer() {
           LinkedIn
         </a>
       </nav>
+      <a
+        className="mt-6 flex items-center text-sm text-neutral-600 transition-all hover:text-neutral-800 dark:text-neutral-300 dark:hover:text-neutral-100"
+        href="/rss"
+      >
+        <ArrowIcon />
+        <span className="ml-2">RSS</span>
+      </a>
       <p className="mt-2 text-neutral-600 dark:text-neutral-300">
         &copy; {new Date().getFullYear()} Aryan
       </p>

@@ -14,9 +14,9 @@ Typography: a large, tight homepage introduction creates the page focal point wh
 
 Project cards: sequential indices make the project list read as an authored body of work, and the cobalt accent guides scanning without adding decoration.
 
-Layout: one centered reading column keeps project evidence and writing easy to scan without competing sidebars.
+Layout: a wide centered portfolio canvas gives project evidence room to lead, while articles keep a narrower reading measure.
 
-Spacing: larger section gaps separate introduction, project evidence, and writing into deliberate reading beats.
+Spacing: larger section gaps separate identity, project evidence, and writing into deliberate reading beats.
 
 Theme: the site follows the visitor's system light or dark preference, preserving the same neutral canvas and cobalt emphasis in both modes.
 

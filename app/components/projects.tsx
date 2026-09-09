@@ -1,10 +1,22 @@
 import Image from 'next/image'
 import { projects } from 'app/projects'
 
-export function ProjectCards({ detailed = false }: { detailed?: boolean }) {
+export function ProjectCards({
+  detailed = false,
+  featured = false,
+}: {
+  detailed?: boolean
+  featured?: boolean
+}) {
+  let visibleProjects = featured
+    ? projects.filter((project) =>
+        ['beecloud-dashboard', 'winterview', 'sahabat-capd'].includes(project.id)
+      )
+    : projects
+
   return (
     <div className="space-y-6">
-      {projects.map((project, index) => (
+      {visibleProjects.map((project, index) => (
         <article
           key={project.id}
           id={detailed ? project.id : undefined}
@@ -13,21 +25,30 @@ export function ProjectCards({ detailed = false }: { detailed?: boolean }) {
           <p className="text-sm font-semibold tabular-nums text-sky-600 dark:text-sky-400">
             {String(index + 1).padStart(2, '0')}
           </p>
-          {detailed && (
-            <div className="my-4 flex max-h-[360px] min-h-0 items-center justify-center overflow-hidden rounded-md border border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950">
+          <h2 className="text-lg font-medium tracking-tight">{project.title}</h2>
+          <p className="mt-2 text-neutral-700 dark:text-neutral-300">
+            {project.summary}
+          </p>
+          {(detailed || featured) && (
+            <div className={`my-5 flex min-h-0 items-center justify-center overflow-hidden rounded-md border border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950 ${detailed ? 'max-h-[360px]' : 'max-h-[260px]'}`}>
               <Image
                 src={project.image.src}
                 alt={project.image.alt}
                 width={project.image.width}
                 height={project.image.height}
-                className="max-h-[360px] max-w-full w-auto object-contain"
+                className={
+                  detailed
+                    ? 'max-h-[360px] max-w-full w-auto object-contain'
+                    : 'max-h-[260px] max-w-full w-auto object-contain'
+                }
               />
             </div>
           )}
-          <h2 className="text-lg font-medium tracking-tight">{project.title}</h2>
-          <p className="mt-2 text-neutral-700 dark:text-neutral-300">
-            {project.summary}
-          </p>
+          {featured && (
+            <p className="text-sm text-neutral-600 dark:text-neutral-400">
+              {project.outcome}
+            </p>
+          )}
           {detailed && (
             <dl className="mt-4 space-y-3 text-sm">
               <div>

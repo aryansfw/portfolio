@@ -11,15 +11,15 @@ import { baseUrl } from './sitemap'
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'Aryan - Frontend Developer',
-    template: '%s | Aryan',
+    default: 'Aryan Shafa Wardana - Frontend Developer',
+    template: '%s | Aryan Shafa Wardana',
   },
-  description: 'Frontend projects and practical writing by Aryan.',
+  description: 'Frontend projects and practical writing by Aryan Shafa Wardana.',
   openGraph: {
-    title: 'Aryan - Frontend Developer',
-    description: 'Frontend projects and practical writing by Aryan.',
+    title: 'Aryan Shafa Wardana - Frontend Developer',
+    description: 'Frontend projects and practical writing by Aryan Shafa Wardana.',
     url: baseUrl,
-    siteName: "Aryan's Portfolio",
+    siteName: "Aryan Shafa Wardana's Portfolio",
     locale: 'en_US',
     type: 'website',
   },
@@ -52,7 +52,7 @@ export default function RootLayout({
         GeistMono.variable
       )}
     >
-      <body className="antialiased mx-auto mt-8 w-full max-w-xl px-6 lg:px-0">
+      <body className="box-border antialiased mx-auto mt-8 w-full max-w-6xl px-6 sm:px-8 lg:px-12">
         <main className="flex-auto min-w-0 mt-6 flex flex-col">
           <Navbar />
           {children}

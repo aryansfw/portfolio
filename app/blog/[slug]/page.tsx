@@ -69,7 +69,7 @@ export default async function Blog({
   }
 
   return (
-    <section>
+    <section className="min-w-0 max-w-3xl">
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -100,7 +100,7 @@ export default async function Blog({
           {formatDate(post.metadata.publishedAt)}
         </p>
       </div>
-      <article className="prose">
+      <article className="prose max-w-2xl">
         <CustomMDX source={post.content} />
       </article>
     </section>
