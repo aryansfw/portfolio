@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { projects } from 'app/projects'
 
 export function ProjectCards({ detailed = false }: { detailed?: boolean }) {
@@ -12,6 +13,17 @@ export function ProjectCards({ detailed = false }: { detailed?: boolean }) {
           <p className="text-sm font-semibold tabular-nums text-sky-600 dark:text-sky-400">
             {String(index + 1).padStart(2, '0')}
           </p>
+          {detailed && (
+            <div className="my-4 flex max-h-[360px] min-h-0 items-center justify-center overflow-hidden rounded-md border border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950">
+              <Image
+                src={project.image.src}
+                alt={project.image.alt}
+                width={project.image.width}
+                height={project.image.height}
+                className="max-h-[360px] max-w-full w-auto object-contain"
+              />
+            </div>
+          )}
           <h2 className="text-lg font-medium tracking-tight">{project.title}</h2>
           <p className="mt-2 text-neutral-700 dark:text-neutral-300">
             {project.summary}

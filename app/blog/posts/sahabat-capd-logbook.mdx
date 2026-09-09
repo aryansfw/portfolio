@@ -8,6 +8,13 @@ Sahabat CAPD is a monitoring application for people undergoing continuous ambula
 
 At first, it looked like a straightforward set of forms. In practice, it was a sequence of actions with timestamps, ordering, and conditions that determine what a patient can do next. Getting each revision right took much more than wiring fields to an API.
 
+<figure>
+  <a href="/projects/sahabat-capd.png" target="_blank" rel="noopener noreferrer" aria-label="Open Sahabat CAPD screenshot at full size">
+    <Image src="/projects/sahabat-capd.png" alt="Sahabat CAPD patient dashboard with treatment reminder and feature cards." width="603" height="1311" sizes="(max-width: 576px) 100vw, 576px" />
+  </a>
+  <figcaption>The patient dashboard groups the treatment logbook with supporting health features.</figcaption>
+</figure>
+
 ## Start with the logic, not the UI
 
 I decided not to brute-force individual screens until they appeared to work. Instead, I treated the exchange flow as a logic problem first: identify the possible states, the valid transitions, and the data each step needed to carry forward.
