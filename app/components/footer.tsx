@@ -1,4 +1,4 @@
-import { GitHubIcon, LinkedInIcon, MailIcon } from 'app/components/icons'
+import { FileTextIcon, GitHubIcon, LinkedInIcon, MailIcon } from 'app/components/icons'
 
 export default function Footer() {
   return (
@@ -25,6 +25,15 @@ export default function Footer() {
         >
           <LinkedInIcon className="size-4" />
           LinkedIn
+        </a>
+        <a
+          className="inline-flex min-h-11 items-center gap-2 underline underline-offset-4"
+          href="/resume.pdf"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <FileTextIcon className="size-4" />
+          Resume
         </a>
       </nav>
       <p className="mt-2 text-neutral-600 dark:text-neutral-300">

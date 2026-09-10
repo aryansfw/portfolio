@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { BlogPosts } from 'app/components/posts'
 import { ProjectCards } from 'app/components/projects'
-import { GitHubIcon, LinkedInIcon, MailIcon } from 'app/components/icons'
+import { FileTextIcon, GitHubIcon, LinkedInIcon, MailIcon } from 'app/components/icons'
 
 export default function Page() {
   return (
@@ -28,6 +28,10 @@ export default function Page() {
         <a className="inline-flex min-h-11 items-center gap-2 underline underline-offset-4" href="https://www.linkedin.com/in/aryanshafawardana" target="_blank" rel="noopener noreferrer">
           <LinkedInIcon className="size-4" />
           LinkedIn
+        </a>
+        <a className="inline-flex min-h-11 items-center gap-2 underline underline-offset-4" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+          <FileTextIcon className="size-4" />
+          Resume
         </a>
       </nav>
 
